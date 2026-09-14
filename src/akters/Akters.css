@@ -1,0 +1,24 @@
+.aktersCard{
+    width: 150px;
+    height: 300px;
+    box-shadow: 5px 5px 10px black;
+    border-radius: 8px;
+    transition: margin-top 0.5s ease;
+
+}
+
+.aktersCard:hover{
+    margin-top: -10px;
+}
+
+.akters{
+    display: flex;
+    margin-top: 67px;
+    gap: 40px;
+    overflow: scroll;
+}
+
+
+
+
+

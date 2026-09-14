@@ -1,0 +1,7 @@
+.videos {
+  margin-top: 50px;
+  margin-left: 100px;
+  justify-content: space-between;
+  display: flex;
+  gap: 50px;
+}

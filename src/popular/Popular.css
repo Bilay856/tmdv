@@ -1,0 +1,36 @@
+.popular {
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 50px;
+  display: flex;
+  margin-bottom: 50px;
+  .popularCard {
+    width: 200px;
+    height: 450px;
+    box-shadow: 5px 5px 10px gray;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .popularCard img {
+    transition: transform 0.3s ease;
+  }
+
+  .popularCard:active {
+    transform: scale(0.98);
+  }
+
+  .gray {
+    color: gray;
+  }
+
+  .popularCard:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.8);
+  }
+
+  h3 {
+    padding-top: 10px;
+    color: deepskyblue;
+  }
+}

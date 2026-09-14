@@ -1,0 +1,48 @@
+#welcome {
+  height: 90vh;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.welcome {
+  padding-top: 260px;
+  padding-left: 300px;
+  color: white;
+
+  h1 {
+    font-size: 60px;
+    font-weight: 600px;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: 600px;
+  }
+
+  .ask {
+    width: 900px;
+    border-radius: 32px;
+    height: 70px;
+    border: none;
+    outline: none;
+    padding-left: 30px;
+    font-size: 20px;
+    margin-left: -60px;
+    margin-top: 25px;
+  }
+
+  .sear {
+    position: absolute;
+    width: 150px;
+    height: 70px;
+    margin-top: 25px;
+    margin-left: -150px;
+
+    background: linear-gradient(90deg, #2e86de 0%, #4ecdc4 100%);
+    border-radius: 32px;
+    border: none;
+    outline: none;
+  }
+}

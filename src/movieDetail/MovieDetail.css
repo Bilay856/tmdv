@@ -1,0 +1,124 @@
+#movieDetail{
+height: 750px;
+display: flex;
+justify-content: center;
+align-items: center;
+padding-left: 50px;
+padding-top: 50px;
+margin-bottom: 50px;
+
+
+
+    
+    .movieDetail{
+        display: flex;
+        color: white ;
+        gap: 50px;
+        
+    }
+
+    .movieDetailTittle{
+       justify-content: space-between;
+
+
+
+    }
+
+.rek{
+    margin-top: 40px;
+}
+
+h1{
+    font-size: 60px;
+}
+
+h5{
+    font-size: 20px;
+}
+
+span{
+    margin-top: 40px;
+}
+
+.text{
+    margin-top: 70px;
+}
+
+}
+.display{
+display: flex;
+gap: 40px;
+margin-top: 50px;
+}
+
+.dasplay{
+    width: 50px;
+    height: 50px;
+    background-color: #081c22;
+    text-align: center;
+    border-radius: 36px;
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+
+
+.display {
+    display: flex;
+    gap: 40px;
+}
+
+.dasplay {
+    width: 40px;
+    height: 40px;
+    background-color: gray;
+    text-align: center;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.favorite {
+    transition: transform 0.3s ease;
+}
+
+.dasplay:hover {
+    width: 55px;
+    height: 55px;
+}
+
+.dasplay:hover .favorite {
+    transform: scale(1.2);
+}
+#movieDetail {
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#movieDetail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(37, 45, 90, 0.85);
+  z-index: 0;
+}
+.movieDetail {
+  position: relative;
+  z-index: 1;
+}
+
+.pauk:hover{
+ filter: brightness(0.5) blur(4px);
+
+
+}
+
+.checkIcon {
+  color: gold;
+}
+
+
+

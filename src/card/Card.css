@@ -1,0 +1,89 @@
+.trending {
+  padding: 40px 50px;
+}
+
+.trending h2 {
+  /* color: white; */
+  font-size: 28px;
+  margin-bottom: 20px;
+  border-left: 4px solid #4ecdc4;
+  padding-left: 15px;
+}
+
+.trendingList {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.filmCard {
+  min-width: 220px;
+  max-width: 220px;
+  cursor: pointer;
+  /* color: white; */
+  transition: transform 0.3s ease;
+}
+
+.filmCard img {
+  width: 100%;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.filmCard h3 {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.filmCard span {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.filmCard:hover {
+  transform: translateY(-10px);
+}
+
+.trendingList{
+    margin-top: 100px;
+}
+
+/* h2{
+
+color: white;
+} */
+
+
+
+#card{
+margin-top: 100px;
+
+
+}
+
+
+
+
+#hello{
+
+    animation: bgShift 6s ease infinite alternate;
+    height: 200px;
+    font-family: sans-serif;
+    color: #fff;
+    padding: 40px;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    margin-top: 170px;
+    color: white;
+  }
+
+  @keyframes bgShift {
+    from { background-color: #0a2540; } 
+    to   { background-color: #1d5f8a; } 
+
+}
+
+
