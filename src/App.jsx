@@ -8,6 +8,7 @@ import MovieDetail from "./movieDetail/MovieDetail";
 import Welcome from "./welcome/Welcome";
 import Footer from "./footer/Footer";
 import Favorite from "./favorite/Favorite";
+import LanguageSwitcher from "./lanuage/Lanuage";
 
 const App = () => {
   return (
