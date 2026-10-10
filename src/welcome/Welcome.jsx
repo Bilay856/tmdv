@@ -1,57 +1,73 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { API_KEY } from "../Api";
+import { API_KEY, BASE, IMG } from "../Api";
 import "./Welcome.css";
 import Card from "../card/Card";
-import Footer from "../footer/Footer";
 import { MovieContext } from "../context";
+import { useNavigate } from "react-router-dom";
 
 const Welcome = () => {
   const [bg, setBg] = useState("");
-  const { t, lang } = useContext(MovieContext);
+  const [text, setText] = useState("");
+  const { t } = useContext(MovieContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getRandomBg() {
-      let apiLang = lang === "RU" ? "ru-RU" : "en-US";
-      const res = await axios(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=${apiLang}`,
-      );
-      const movies = res.data.results;
-      const random = movies[Math.floor(Math.random() * movies.length)];
-      setBg(random.backdrop_path);
+      try {
+        let res = await axios(`${BASE}movie/popular?api_key=${API_KEY}`);
+        let movies = res.data.results.filter((el) => el.backdrop_path);
+        let random = movies[Math.floor(Math.random() * movies.length)];
+        setBg(random.backdrop_path);
+      } catch (err) {
+        console.log(err);
+      }
     }
     getRandomBg();
-  }, [lang]);
+  }, []);
+
+  function goSearch(e) {
+    e.preventDefault();
+    let word = text.trim();
+    if (word === "") {
+      return;
+    }
+    navigate(`/search/${encodeURIComponent(word)}`);
+  }
+
+  let size = window.innerWidth < 768 ? "w780" : "w1280";
 
   return (
-    <div
-      id="welcome"
-      style={{
-        backgroundImage: bg
-          ? `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${bg})`
-          : "none",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-      }}
-    >
-      <div className="container">
-        <div className="welcome">
-          <h1>{t.welcomeTitle}</h1>
-          <h2>{t.welcomeSubtitle}</h2>
-          <div className="buton">
-            <input
-              className="ask"
-              type="text"
-              placeholder={t.searchPlaceholder}
-            />
-            <button className="sear">{t.searchButton}</button>
+    <>
+      <div
+        id="welcome"
+        style={{
+          backgroundImage: bg ? `url(${IMG}${size}${bg})` : "none",
+        }}
+      >
+        <div className="welcomeShade">
+          <div className="container">
+            <div className="welcome">
+              <h1>{t.welcomeTitle}</h1>
+              <h2>{t.welcomeSubtitle}</h2>
+              <form className="welcomeForm" onSubmit={goSearch}>
+                <input
+                  className="ask"
+                  type="text"
+                  placeholder={t.searchPlaceholder}
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                />
+                <button className="sear" type="submit">
+                  {t.searchButton}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
       <Card />
-      <Footer />
-    </div>
+    </>
   );
 };
 

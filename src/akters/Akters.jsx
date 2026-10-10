@@ -1,39 +1,54 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { API_KEY } from "../Api";
+import { API_KEY, BASE, IMG } from "../Api";
 import "./Akters.css";
 import { MovieContext } from "../context";
 
 const Akters = ({ movieId }) => {
   const [akters, setAkters] = useState([]);
-  const { lang } = useContext(MovieContext);
+  const { lang, t } = useContext(MovieContext);
 
-  async function getAkters(key) {
+  async function getAkters() {
     let apiLang = lang === "RU" ? "ru-RU" : "en-US";
-    let result = await axios(
-      `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${key}&language=${apiLang}`,
-    );
-    setAkters(result.data.cast);
+    try {
+      let res = await axios(
+        `${BASE}movie/${movieId}/credits?api_key=${API_KEY}&language=${apiLang}`,
+      );
+      setAkters(res.data.cast.slice(0, 20));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
-    getAkters(API_KEY);
+    getAkters();
   }, [movieId, lang]);
+
+  if (akters.length === 0) {
+    return null;
+  }
 
   return (
     <div id="akters">
-      <div className="akters">
-        {akters.map((el) => (
-          <div className="aktersCard" key={el.id}>
-            <img
-              src={`https://image.tmdb.org/t/p/w440_and_h660_face/${el.profile_path}`}
-              alt=""
-              width="150px"
-            />
-            <h2>{el.name}</h2>
-            <span>{el.character}</span>
-          </div>
-        ))}
+      <div className="container">
+        <h2 className="sectionTitle">{t.cast}</h2>
+        <div className="aktersList">
+          {akters.map((el) => (
+            <div className="aktersCard" key={el.credit_id}>
+              {el.profile_path ? (
+                <img
+                  src={`${IMG}w185${el.profile_path}`}
+                  alt={el.name}
+                  loading="lazy"
+                />
+              ) : (
+                <div className="noPhoto">👤</div>
+              )}
+              <h4>{el.name}</h4>
+              <span>{el.character}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

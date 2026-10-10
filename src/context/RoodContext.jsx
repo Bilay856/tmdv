@@ -3,6 +3,7 @@ import { MovieContext } from ".";
 
 const translations = {
   EN: {
+    home: "Home",
     popular: "Popular",
     topRated: "Top Rated",
     searchPlaceholder: "Search...",
@@ -29,9 +30,20 @@ const translations = {
     welcomeTitle: "Welcome.",
     welcomeSubtitle: "Millions of movies, TV shows and people. Explore now.",
     searchButton: "Search",
-    removeFromFavorite: 'Remove from favorites'
+    addFavorite: "Add to favorites",
+    removeFromFavorite: "Remove from favorites",
+    overview: "Overview",
+    cast: "Cast",
+    trailers: "Trailers",
+    hour: "h",
+    min: "m",
+    loadMore: "Load more",
+    noResults: "Nothing found",
+    searchResults: "Search results",
+    emptyFavorite: "No favorites yet",
   },
   RU: {
+    home: "Главная",
     popular: "Популярные",
     topRated: "Топ рейтинг",
     searchPlaceholder: "Поиск...",
@@ -54,26 +66,67 @@ const translations = {
     footerTerms: "Условия использования",
     footerApiTerms: "API Правила использования",
     footerPrivacy: "Политика конфиденциальности",
-    footerDmca: "Политика CDMCA",
+    footerDmca: "Политика DMCA",
     welcomeTitle: "Добро пожаловать.",
     welcomeSubtitle: "Миллионы фильмов, сериалов и людей. Исследуйте сейчас.",
     searchButton: "Поиск",
-    removeFromFavorite : 'Удалить из избранного'
+    addFavorite: "В избранное",
+    removeFromFavorite: "Удалить из избранного",
+    overview: "Обзор",
+    cast: "В ролях",
+    trailers: "Трейлеры",
+    hour: "ч",
+    min: "мин",
+    loadMore: "Показать ещё",
+    noResults: "Ничего не найдено",
+    searchResults: "Результаты поиска",
+    emptyFavorite: "В избранном пока пусто",
   },
 };
 
 const RoodContext = ({ children }) => {
   const [favorite, setFavorite] = useState(() => {
-    return JSON.parse(localStorage.getItem("favorite")) || [];
+    try {
+      return JSON.parse(localStorage.getItem("favorite")) || [];
+    } catch (err) {
+      return [];
+    }
   });
 
-  const [lang, setLang] = useState("RU");
-  const [langu,setLangu] = useState('ru-Ru')
+  const [lang, setLangState] = useState(() => {
+    return localStorage.getItem("lang") || "RU";
+  });
+
+  function setLang(value) {
+    setLangState(value);
+    localStorage.setItem("lang", value);
+  }
+
+  function toggleFavorite(item) {
+    let exists = favorite.some((el) => el.id === item.id);
+    let result = [];
+    if (exists) {
+      result = favorite.filter((el) => el.id !== item.id);
+    } else {
+      let slim = {
+        id: item.id,
+        title: item.title,
+        poster_path: item.poster_path,
+        release_date: item.release_date,
+        vote_average: item.vote_average,
+      };
+      result = [...favorite, slim];
+    }
+    setFavorite(result);
+    localStorage.setItem("favorite", JSON.stringify(result));
+  }
 
   let t = translations[lang];
 
   return (
-    <MovieContext.Provider value={{langu,setLangu, favorite, setFavorite, lang, setLang, t }}>
+    <MovieContext.Provider
+      value={{ favorite, setFavorite, toggleFavorite, lang, setLang, t }}
+    >
       {children}
     </MovieContext.Provider>
   );

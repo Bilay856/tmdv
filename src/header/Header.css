@@ -1,188 +1,206 @@
 #header {
-  background: var(--header-bg, #1c1f26);
-  height: 80px;
+  background: var(--header-bg);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  transition: background 0.3s ease, color 0.3s ease;
-
-  .headerLeft {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    a {
-      color: var(--text-color, white);
-      transition: color 0.3s ease;
-    }
-    a:hover {
-      color: #4ecdc4;
-    }
-  }
-
-  .headerRight {
-    color: var(--text-color, white);
-    display: flex;
-    gap: 40px;
-    align-items: center;
-  }
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s ease;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 80px;
+  gap: 28px;
+  height: 70px;
 }
 
-.logo {
-  width: 200px;
+.logoLink {
   display: block;
 }
 
-.headerMenu {
+.logo {
+  width: 150px;
+  display: block;
+}
+
+.headerLinks {
   display: flex;
+  gap: 8px;
   flex: 1;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 40px;
 }
 
-.burger {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: var(--text-color, white);
+.navLink {
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.black_sun {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  color: var(--text-color, white);
-  transition: transform 0.3s ease, color 0.3s ease;
+.navLink:hover {
+  color: var(--accent);
 }
 
-.black_sun:hover {
-  transform: rotate(20deg);
-}
-
-.black_sun:active {
-  transform: scale(0.9);
-}
-
-.inpiut {
-  width: 250px;
-  height: 30px;
-  color: var(--text-color, white);
-  border-radius: 16px;
-  background-color: var(--header-bg, #1c1f26);
-  padding-left: 20px;
-  border: solid aqua 3px;
-  outline: none;
-  transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.inpiut:focus {
-  box-shadow: 0 0 10px aqua;
-}
-
-.search {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  color: var(--text-color, white);
-}
-
-select {
-  width: 76px;
-  height: 30px;
-  border-radius: 8px;
-  background-color: var(--header-bg, #1c1f26);
-  color: var(--text-color, white);
-  border: solid var(--text-color, white) 1px;
-  outline: none;
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-body.dark-theme {
-  --header-bg: #1c1f26;
-  --text-color: white;
-  background-color: #15171c;
+.navLink.active {
+  background: linear-gradient(90deg, var(--accent2), var(--accent));
   color: white;
 }
 
-body.light-theme {
-  --header-bg: #ffffff;
-  --text-color: #04223a;
-  background-color: #ffffff;
-  color: #04223a;
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-@keyframes menuShow {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.searchBox {
+  position: relative;
 }
 
-@media (max-width: 1000px) {
-  .burger {
-    display: block;
+.searchInput {
+  width: 240px;
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid var(--accent);
+  background: var(--bg);
+  color: var(--text);
+  padding: 0 44px 0 16px;
+  font-size: 15px;
+  outline: none;
+  transition: box-shadow 0.3s ease, width 0.3s ease;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 10px var(--accent);
+  width: 280px;
+}
+
+.searchBtn {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+
+.themeBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 22px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease;
+}
+
+.themeBtn:hover {
+  transform: rotate(20deg);
+}
+
+.themeBtn:active {
+  transform: scale(0.9);
+}
+
+.langSelect {
+  height: 40px;
+  padding: 0 8px;
+  border-radius: 10px;
+  border: 1px solid var(--muted);
+  background: var(--header-bg);
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+}
+
+.bottomNav {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  #header {
+    position: static;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 0;
+    gap: 10px;
+  }
+
+  .logoLink {
+    flex: 1;
   }
 
   .logo {
-    width: 130px;
+    width: 110px;
   }
 
-  .headerMenu {
+  .headerLinks {
     display: none;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    margin-left: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
-    padding: 25px 5%;
-    background: var(--header-bg, #1c1f26);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    animation: menuShow 0.3s ease;
   }
 
-  .headerMenu.open {
-    display: flex;
+  .headerRight {
+    display: contents;
   }
 
-  #header .headerLeft {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    font-size: 20px;
+  .themeBtn {
+    order: 2;
   }
 
-  #header .headerRight {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 20px;
+  .langSelect {
+    order: 3;
   }
 
   .searchBox {
-    position: relative;
-    width: 100%;
+    order: 4;
+    flex: 0 0 100%;
   }
 
-  .inpiut {
+  .searchInput,
+  .searchInput:focus {
     width: 100%;
+    font-size: 16px;
   }
 
-  .searchBox .search {
-    top: 0;
-    right: 8px;
+  .bottomNav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: var(--header-bg);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.25);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 9px 0 8px;
+    color: var(--muted);
+    font-size: 11px;
+    transition: color 0.3s ease;
+  }
+
+  .tab svg {
+    font-size: 20px;
+  }
+
+  .tab.active {
+    color: var(--accent);
   }
 }

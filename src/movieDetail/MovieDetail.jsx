@@ -1,109 +1,120 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
-import { API_KEY } from "../Api";
+import { API_KEY, BASE, IMG } from "../Api";
 import "./MovieDetail.css";
 import { useParams } from "react-router-dom";
-import { LuMenu } from "react-icons/lu";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { MdOutlineBookmark } from "react-icons/md";
-import { MdBookmarkAdded } from "react-icons/md";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import Akters from "../akters/Akters";
 import Videos from "../videos/Videos";
-import Footer from "../footer/Footer";
 import { MovieContext } from "../context";
 
 const MovieDetail = () => {
-  const [MovieDetail, setMovieDetail] = useState({});
+  const [movie, setMovie] = useState({});
   const { movieId } = useParams();
-  const { favorite, setFavorite, lang } = useContext(MovieContext);
+  const { favorite, toggleFavorite, lang, t } = useContext(MovieContext);
 
-  async function getMovieDetail(key) {
+  async function getMovieDetail() {
     let apiLang = lang === "RU" ? "ru-RU" : "en-US";
-    let res = await axios(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&language=${apiLang}`,
-    );
-    setMovieDetail(res.data);
+    try {
+      let res = await axios(
+        `${BASE}movie/${movieId}?api_key=${API_KEY}&language=${apiLang}`,
+      );
+      setMovie(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
-    getMovieDetail(API_KEY);
+    getMovieDetail();
   }, [movieId, lang]);
 
-  let isFavorite = favorite.some((el) => el.id === MovieDetail.id);
-
-  function toggleFavorite(item) {
-    if (isFavorite) {
-      let filterMovie = favorite.filter((el) => el.id !== item.id);
-      setFavorite(filterMovie);
-      localStorage.setItem("favorite", JSON.stringify(filterMovie));
-    } else {
-      let result = [...favorite, item];
-      setFavorite(result);
-      localStorage.setItem("favorite", JSON.stringify(result));
-    }
+  if (!movie.id) {
+    return <div className="loader"></div>;
   }
+
+  let isFavorite = favorite.some((el) => el.id === movie.id);
+  let size = window.innerWidth < 768 ? "w780" : "w1280";
+  let year = movie.release_date ? movie.release_date.slice(0, 4) : "";
+  let rating = movie.vote_average ? movie.vote_average.toFixed(1) : "";
+  let hours = movie.runtime ? Math.floor(movie.runtime / 60) : 0;
+  let minutes = movie.runtime ? movie.runtime % 60 : 0;
 
   return (
     <>
       <div
         id="movieDetail"
         style={{
-          background: `url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${MovieDetail.backdrop_path}) center center / cover`,
+          backgroundImage: movie.backdrop_path
+            ? `url(${IMG}${size}${movie.backdrop_path})`
+            : "none",
         }}
       >
-        <div className="movieDetail">
-          <img
-            className="pauk"
-            src={`https://image.tmdb.org/t/p/w440_and_h660_face/${MovieDetail.poster_path}`}
-            alt=""
-            width="250px"
-          />
-          <div className="movieDetailTittle">
-            <h1>
-              {MovieDetail.title} {MovieDetail.release_date?.slice(0, 4)}{" "}
-            </h1>
-            <h5>
-              {MovieDetail.release_date}
-              {MovieDetail.genres?.map((el) => (
-                <span key={el.id}>{el.name}</span>
-              ))}
-              {MovieDetail.runtime}
-            </h5>
-            <div className="display">
-              <div className="dasplay">
-                <LuMenu className="favorite" />
-              </div>
-              <div className="dasplay">
-                <MdOutlineFavoriteBorder className="favorite" />
-              </div>
-              <div className="dasplay">
-                <a onClick={() => toggleFavorite(MovieDetail)}>
-                  {isFavorite ? (
-                    <MdBookmarkAdded className="favorite" />
-                  ) : (
-                    <MdOutlineBookmark className="favorite" />
+        <div className="detailShade">
+          <div className="container">
+            <div className="movieDetail">
+              {movie.poster_path ? (
+                <img
+                  className="detailPoster"
+                  src={`${IMG}w500${movie.poster_path}`}
+                  alt={movie.title}
+                />
+              ) : (
+                <div className="detailPoster detailNoPoster">🎬</div>
+              )}
+
+              <div className="detailInfo">
+                <h1>
+                  {movie.title}
+                  {year && <span className="detailYear"> ({year})</span>}
+                </h1>
+
+                <div className="detailMeta">
+                  {movie.release_date && <span>{movie.release_date}</span>}
+                  {movie.runtime > 0 && (
+                    <span>
+                      {hours}
+                      {t.hour} {minutes}
+                      {t.min}
+                    </span>
                   )}
-                </a>
+                  {rating && <span className="detailRating">★ {rating}</span>}
+                </div>
+
+                <div className="genres">
+                  {movie.genres?.map((el) => (
+                    <span className="genre" key={el.id}>
+                      {el.name}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  className={isFavorite ? "favoriteBtn active" : "favoriteBtn"}
+                  onClick={() => toggleFavorite(movie)}
+                >
+                  {isFavorite ? <FaBookmark /> : <FaRegBookmark />}
+                  <span>
+                    {isFavorite ? t.removeFromFavorite : t.addFavorite}
+                  </span>
+                </button>
+
+                {movie.tagline && <p className="tagline">{movie.tagline}</p>}
+
+                {movie.overview && (
+                  <>
+                    <h3>{t.overview}</h3>
+                    <p className="overview">{movie.overview}</p>
+                  </>
+                )}
               </div>
             </div>
-
-            <p className="rek">{MovieDetail.tagline}</p>
-            <p className="text">{MovieDetail.overview}</p>
-          </div>
-        </div>
-      </div>
-      <div id="akters">
-        <div className="container">
-          <div className="akters">
-            <Akters movieId={movieId} />
           </div>
         </div>
       </div>
 
-      <div className="videos">
-        <Videos movieId={movieId} />
-      </div>
-      <Footer />
+      <Akters movieId={movieId} />
+      <Videos movieId={movieId} />
     </>
   );
 };

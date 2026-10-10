@@ -1,7 +1,69 @@
+#video {
+  padding-bottom: 20px;
+}
+
 .videos {
-  margin-top: 50px;
-  margin-left: 100px;
-  justify-content: space-between;
-  display: flex;
-  gap: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.videoBox {
+  min-width: 0;
+}
+
+.videoBox p {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.videoThumb,
+.videoBox iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  display: block;
+  border: 0;
+}
+
+.videoThumb {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: black;
+}
+
+.videoThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.videoThumb:hover img {
+  opacity: 1;
+}
+
+.playBtn {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+@media (max-width: 768px) {
+  .videos {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
 }
