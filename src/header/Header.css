@@ -63,7 +63,7 @@ select{
     color: var(--text-color, white);
     border: solid var(--text-color, white) 1px;
     outline: none;
-    transition: color 0.3s ease, background-color 0.3s ease;
+    transition: color 0.3s ease, backgound-color 0.3s ease;
 }
 
 

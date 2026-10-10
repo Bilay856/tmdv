@@ -8,7 +8,7 @@ import { MovieContext } from "../context";
 
 const Header = () => {
   const [isDark, setIsDark] = useState(false);
-  const { lang, setLang, t } = useContext(MovieContext);
+  const { lang, setLang, t, setLangu} = useContext(MovieContext);
 
   useEffect(() => {
     document.body.classList.toggle("light-theme", !isDark);

@@ -68,11 +68,12 @@ const RoodContext = ({ children }) => {
   });
 
   const [lang, setLang] = useState("RU");
+  const [langu,setLangu] = useState('ru-Ru')
 
   let t = translations[lang];
 
   return (
-    <MovieContext.Provider value={{ favorite, setFavorite, lang, setLang, t }}>
+    <MovieContext.Provider value={{langu,setLangu, favorite, setFavorite, lang, setLang, t }}>
       {children}
     </MovieContext.Provider>
   );
