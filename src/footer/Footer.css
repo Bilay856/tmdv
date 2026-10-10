@@ -4,15 +4,41 @@
   color: white;
   padding-top: 100px;
   padding-left: 50px;
-  /* margin-top: 100px; */
 }
 
 #footer {
   background: #04223a;
   width: 100%;
-  height: 400px;
+  min-height: 400px;
 }
 
 .gg {
   margin-top: 10px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.gg:hover {
+  color: #4ecdc4;
+}
+
+@media (max-width: 1000px) {
+  .footer_dives {
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 50px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer_dives {
+    flex-direction: column;
+  }
+  .footer_dives h1 {
+    font-size: 22px;
+  }
+  .footer_dives h2 {
+    font-size: 16px;
+    font-weight: 400;
+  }
 }

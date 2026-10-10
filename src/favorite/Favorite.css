@@ -19,3 +19,13 @@ body.dark-theme button {
   box-shadow: 0 2px 6px white;
   border: solid 2px black;
 }
+
+
+@media (max-width: 768px) {
+  .deletekak {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+}

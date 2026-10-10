@@ -86,4 +86,53 @@ margin-top: 100px;
 
 }
 
+.trendingList {
+  scroll-snap-type: x mandatory;
+}
 
+.filmCard {
+  scroll-snap-align: start;
+}
+
+.filmCard:hover img {
+  box-shadow: 0 8px 20px rgba(78, 205, 196, 0.5);
+}
+
+@media (max-width: 768px) {
+  #hello {
+    margin-top: 40px;
+    padding: 20px 0;
+    height: auto;
+    min-height: 0;
+  }
+
+  #card {
+    margin-top: 0;
+  }
+
+  .trending {
+    padding: 20px 15px;
+  }
+
+  .trending h2 {
+    font-size: 22px;
+  }
+
+  .trendingList {
+    margin-top: 20px;
+    gap: 15px;
+  }
+
+  .filmCard {
+    min-width: 140px;
+    max-width: 140px;
+  }
+
+  .filmCard img {
+    height: 210px;
+  }
+
+  .filmCard h3 {
+    font-size: 14px;
+  }
+}

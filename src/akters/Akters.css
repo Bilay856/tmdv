@@ -22,3 +22,21 @@
 
 
 
+.aktersCard {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .akters {
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .aktersCard h2 {
+    font-size: 14px;
+  }
+
+  .aktersCard span {
+    font-size: 12px;
+  }
+}

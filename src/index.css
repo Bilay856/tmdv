@@ -1,14 +1,45 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
-.container{
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+.container {
   width: 90%;
   margin: 0 auto;
 }
 
-a{
+a {
   text-decoration: none;
   color: white;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4ecdc4;
+  border-radius: 8px;
 }
