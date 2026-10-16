@@ -41,6 +41,7 @@ const translations = {
     noResults: "Nothing found",
     searchResults: "Search results",
     emptyFavorite: "No favorites yet",
+    noTrailer: "Trailer not found",
   },
   RU: {
     home: "Главная",
@@ -81,6 +82,7 @@ const translations = {
     noResults: "Ничего не найдено",
     searchResults: "Результаты поиска",
     emptyFavorite: "В избранном пока пусто",
+    noTrailer: "Трейлер не найден",
   },
 };
 
